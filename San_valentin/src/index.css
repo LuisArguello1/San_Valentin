@@ -1,0 +1,187 @@
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+/* Tailwind CSS */
+@import "tailwindcss";
+
+/* Variables CSS globales */
+:root {
+  --color-bg-primary: #0b0b10;
+  --color-accent-primary: #ff4d6d;
+  --color-accent-secondary: #ff6b9d;
+  --color-accent-gold: #ffd700;
+  --color-text-primary: #f8f8f8;
+  --color-text-secondary: #b0b0b0;
+}
+
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Títulos con fuente especial */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Texto de párrafos */
+p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* Selección de texto */
+::selection {
+  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+  color: white;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-accent-primary), var(--color-accent-secondary));
+  border-radius: 10px;
+  border: 2px solid var(--color-bg-primary);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-accent-secondary), var(--color-accent-gold));
+}
+
+/* Perspective para efectos 3D */
+.perspective-1000 {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Glassmorphism */
+.glass {
+  backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animaciones personalizadas */
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Mejoras de accesibilidad */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Optimización de rendimiento */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Disable animations para accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimizaciones para móvil */
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(20, 20, 30, 0.8);
+    /* Fallback más opaco y oscuro para legibilidad */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .blur-3xl {
+    filter: blur(40px);
+    /* Reducir radio de blur */
+  }
+
+  .blur-2xl {
+    filter: blur(24px);
+  }
+
+  /* Desactivar animaciones costosas en móvil si es necesario */
+  .animate-pulse-slow {
+    animation: none;
+  }
+
+  /* Clase optimizada para paneles de vidrio en móvil */
+  .glass-panel {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(11, 11, 16, 0.85) !important;
+    /* Fondo oscuro casi opaco */
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Utilitario para glass en desktop (se aplica vía @apply o composición en clases, pero aquí lo definimos para uso directo si se prefiere)
+   o simplemente usamos las clases de tailwind en el HTML y dejamos que la media query de arriba las sobreescriba si usamos la clase marcador .glass-panel 
+   
+   Para evitar conflictos, usaremos la clase .glass-panel en el HTML junto con las clases de Tailwind.
+   En desktop, .glass-panel no hace nada (o hereda). En móvil, impone estilos.
+*/
